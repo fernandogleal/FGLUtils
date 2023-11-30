@@ -1,0 +1,34 @@
+#' Prepare a path for use in a script
+#'
+#' The function is used to prepare a path for use in a script. The path can either be supplied as an argument or entered by the user.
+#' It will convert any backslashes (\) in the path to forward slashes (/), as forward slashes are more commonly used in R.
+#' It also assigns the prepared path to a global variable 'caminho' for further use in the script and writes the path to the clipboard.
+#'
+#' @param path The path to prepare. If not supplied, the user will be prompted to enter the path. Defaults to "clipboard".
+#' @return The prepared path.
+#' @export
+#' @examples
+#' pathPrep()
+#' pathPrep("C:\\test\\path")
+prepare_path <- function(path = "clipboard") {
+  # check if path is passed as argument, if not, read the content of the clipboard
+  y <- if (path == "clipboard") {
+    readClipboard()
+  } else {
+    cat("Please enter the path:\n\n")
+    readline()
+  }
+
+  # removes quotes from the path
+  x <- gsub("\"", "", y)
+  # convert backslashes to forward slashes
+  x <- chartr("\\", "/", x)
+
+  # assigns prepared path to global variable 'caminho'
+  assign("caminho", x, envir = globalenv())
+
+  # writes prepared path to clipboard
+  writeClipboard(x)
+
+  return(x)
+}
