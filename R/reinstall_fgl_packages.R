@@ -12,14 +12,14 @@
 #' # reinstall_fgl_packages("pkAIX")
 reinstall_fgl_packages <- function(pacote = "FGLUtils") {
 
+  # devtools::install_github(repo = "https://github.com/fernandogleal/FGLUtils.git",auth_token = "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")
   computer <- Sys.info()["nodename"]
-
   root_path <- switch(computer,
-                      "FLEAL-DELL" = paste0("C:/Users/fleal/Google Drive/R/FGL_package/", pacote),
+                      "FLEAL-DELL" = paste0("C:/Users/FLeal/iCloudDrive/programacao/R/FGL_package/", pacote),
                       "SURFACE-FG" = paste0("C:/Users/fleal/My Drive/R/FGL_package/", pacote),
                       "DESKTOP-FOTV0GM" = paste0("C:/Users/FLeal/Meu Drive/R/FGL_package/", pacote),
                       "workDesktop" = "C:/Users/workDesktop/Documents",
-                      "NB-AIX-001" = paste0("C:/Users/FLeal/GoogleDrive/R/FGL_package/", pacote),
+                      "NB-AIX-001" = paste0("C:/Users/FLeal/iCloudDrive/programacao/R/FGL_package/", pacote),
                       "Other"
   )
 

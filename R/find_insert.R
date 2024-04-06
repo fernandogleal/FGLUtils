@@ -3,39 +3,40 @@
 #' @description
 #' This function is used to localize a value in a column of a data frame and insert the value of another column from a reference data frame.
 #'
-#' @param BaseClassificar A data frame that will receive the insertion of the values.
-#' @param NomeColunaProcurar The name of the column in the BaseClassificar data frame that will be searched for a value.
-#' @param BaseIndentificacao A reference data frame containing the values to be inserted.
-#' @param NomeColunaInserir The name of the column in the BaseClassificar data frame that will receive the insertion of the values.
+#' @param base_classificar A data frame that will receive the insertion of the values.
+#' @param nome_coluna_procurar The name of the column in the base_classificar data frame that will be searched for a value.
+#' @param base_identificacao A reference data frame containing the values to be inserted.
+#' @param nome_coluna_inserir The name of the column in the base_classificar data frame that will receive the insertion of the values.
 #'
-#' @return The BaseClassificar data frame with the inserted values.
+#' @return The base_classificar data frame with the inserted values.
 #' @export
-find_insert <- function (BaseClassificar = extrato2,NomeColunaProcurar = "historico",BaseIndentificacao = base_identificacao,NomeColunaInserir = "pkConta") {
+find_insert <- function (base_classificar, nome_coluna_procurar, base_identificacao, nome_coluna_inserir) {
 
-  BaseClassificar <- BaseClassificar |>
+  base_classificar <- base_classificar |>
     dplyr::mutate(inserido := NA) |>
     dplyr::rename(procurar := {
       {
-        NomeColunaProcurar
+        nome_coluna_procurar
       }
     })
 
-  for (i in 1:nrow(BaseIndentificacao)) {
-    BaseClassificar[grepl(tolower(BaseIndentificacao$procurar[i]),
-                          tolower(BaseClassificar$procurar)),]$inserido <-
-      BaseIndentificacao$inserir[i]
+  for (i in 1:nrow(base_identificacao)) {
+    base_classificar[grepl(tolower(base_identificacao$procurar[i]),
+                           tolower(base_classificar$procurar)),]$inserido <-
+      base_identificacao$inserir[i]
   }
 
-  BaseClassificar <- BaseClassificar |>
+  base_classificar <- base_classificar |>
     dplyr::rename({
       {
-        NomeColunaInserir
+        nome_coluna_inserir
       }
     } := inserido, {
       {
-        NomeColunaProcurar
+        nome_coluna_procurar
       }
     } := procurar)
 
-  return(BaseClassificar)
+  return(base_classificar)
 }
+

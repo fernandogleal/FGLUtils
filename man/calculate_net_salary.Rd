@@ -7,7 +7,7 @@
 calculate_net_salary(
   funcionario = "FGL",
   proventos,
-  dependentes,
+  dependentes = 0,
   adiantamento = 0,
   pgbl = 0
 )
@@ -30,6 +30,6 @@ A \code{tibble}, os dados do salario, deduções e salario liquido
 Calcular o salario líquido de impostos
 }
 \examples{
-# FGL <- calculate_net_salary(uncionario = "FGL", proventos = 10000, dependentes = 2)
+# FGL <- calculate_net_salary(funcionario = "FGL", proventos = 84726.72, dependentes=2, adiantamento = 0, pgbl = 21827.08)
 
 }
