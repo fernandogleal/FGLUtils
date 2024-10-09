@@ -21,9 +21,7 @@ Imports:
     lubridate,
     openxlsx,
     pdftools,
-    Quandl,
     scales,
     stringr,
-    tesseract,
     tibble,
     tidyr

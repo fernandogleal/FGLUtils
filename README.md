@@ -25,7 +25,7 @@ install.packages("devtools")
 Then, you can install FGLUtils:
 
 ```R
-devtools::install_github("fernandoguerraleal/FGLUtils")
+devtools::install_github("fernandogleal/FGLUtils")
 ```
 
 ## Usage
