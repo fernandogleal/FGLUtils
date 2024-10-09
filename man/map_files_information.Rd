@@ -20,7 +20,7 @@ information into a column, and returns the resulting tibble.
 }
 \examples{
 \dontrun{
-map_files_information("your/directory/path")
+file_info <- get_file_info("C:/Users")
 }
 
 }

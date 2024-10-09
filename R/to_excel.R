@@ -4,17 +4,19 @@
 #' @param arquivo a character string for the name of the excel file
 #' @return opens the Excel file
 #' @export
-to_excel <- function(df, arquivo = "padrao") {
+to_excel <- function(df, arquivo = "padrao", caminho = "C:/Users/FLeal/Downloads") {
   # require(openxlsx)
   options("openxlsx.dateFormat" = "dd/mm/yyyy")
+  caminho_windows <- stringr::str_replace(caminho, "C:/", "/mnt/c/")
+  # caminho_arquivo <- paste0(caminho, "/", arquivo,".xlsx")
 
   # Create file path
   # Check if file already exists, if so add a number to the name
-  caminho <- path.expand("~")
+  # caminho <- path.expand("~")
 
-  if(file.exists(paste0(caminho, "/", arquivo,".xlsx"))) {
+  if(file.exists(paste0(caminho_windows, "/", arquivo,".xlsx"))) {
     i <- 1
-    while(file.exists(paste0(caminho, "/", arquivo,"_", i,".xlsx"))) {
+    while(file.exists(paste0(caminho_windows, "/", arquivo,"_", i,".xlsx"))) {
       i <- i + 1
     }
     arquivo <- paste0(arquivo,"_", i)
@@ -40,7 +42,11 @@ to_excel <- function(df, arquivo = "padrao") {
   } else {
     print("The object should be a list or a dataframe")
   }
+  
 
-  openxlsx::saveWorkbook(wb, file = paste0(caminho, "/", arquivo,".xlsx"), overwrite = TRUE)
-  openxlsx::openXL(file = paste0(caminho, "/", arquivo,".xlsx"))
+  openxlsx::saveWorkbook(wb, file = paste0(caminho_windows, "/", arquivo,".xlsx"), overwrite = TRUE)
+  caminho_arquivo <- paste0(caminho, "/", arquivo,".xlsx")
+
+  # openxlsx::openXL(file = paste0(caminho, "/", arquivo,".xlsx"))
+  system(glue::glue('cmd.exe /C start "" "{caminho_arquivo}"'))
 }

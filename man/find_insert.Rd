@@ -5,23 +5,23 @@
 \title{Localize and insert values into a data frame}
 \usage{
 find_insert(
-  BaseClassificar = extrato2,
-  NomeColunaProcurar = "historico",
-  BaseIndentificacao = base_identificacao,
-  NomeColunaInserir = "pkConta"
+  base_classificar,
+  nome_coluna_procurar,
+  base_identificacao,
+  nome_coluna_inserir
 )
 }
 \arguments{
-\item{BaseClassificar}{A data frame that will receive the insertion of the values.}
+\item{base_classificar}{A data frame that will receive the insertion of the values.}
 
-\item{NomeColunaProcurar}{The name of the column in the BaseClassificar data frame that will be searched for a value.}
+\item{nome_coluna_procurar}{The name of the column in the base_classificar data frame that will be searched for a value.}
 
-\item{BaseIndentificacao}{A reference data frame containing the values to be inserted.}
+\item{base_identificacao}{A reference data frame containing the values to be inserted.}
 
-\item{NomeColunaInserir}{The name of the column in the BaseClassificar data frame that will receive the insertion of the values.}
+\item{nome_coluna_inserir}{The name of the column in the base_classificar data frame that will receive the insertion of the values.}
 }
 \value{
-The BaseClassificar data frame with the inserted values.
+The base_classificar data frame with the inserted values.
 }
 \description{
 This function is used to localize a value in a column of a data frame and insert the value of another column from a reference data frame.

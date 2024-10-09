@@ -22,8 +22,10 @@
 #' @importFrom lubridate %m-%
 #' @export
 
-correct_inflation <- function(valor = 1000, database = "01/2003", indice = "ipca"){
+correct_inflation <- function(valor = 1000, database = "01/2001", indice = "ipca"){
+correct_inflation <- function(valor = 1000, database = "01/2001", indice = "ipca"){
 
+  library(lubridate)
   ajustar_data <- function(database){
 
     if(nchar(database) != 7 & substr(database, 3, 3) != "/") stop("'database' tem que estar no formato MM/YYYY.")
@@ -70,6 +72,7 @@ correct_inflation <- function(valor = 1000, database = "01/2003", indice = "ipca
     httr::stop_for_status(dados, task = "Buscando os dados do INCC da API do IPEA.")
 
   }
+
   # Calculate changes in prices
   indice <- httr::content(dados)[[2]]
   indice <- dplyr::bind_rows(indice)[,2:3]
@@ -78,15 +81,14 @@ correct_inflation <- function(valor = 1000, database = "01/2003", indice = "ipca
   indice$Fator <- indice$VALVALOR/valorDatabase
   indice <- indice|> dplyr::select(Mes := 1, Fator)
 
-
   df <- indice |>
     dplyr::left_join(meses_reajuste, by = "Mes")|>
     dplyr::mutate(VariacaoMensal = (Fator/dplyr::lag(Fator)-1),
-           Variacao12Mees = (Fator/dplyr::lag(Fator,12)-1),
+           Variacao12Meses = (Fator/dplyr::lag(Fator,12)-1),
            Fator = dplyr::lag(Fator),
            valorReajustado = Fator*valor,
            MesBase = dplyr::if_else(Mes == database,"Data base",dplyr::lag(MesBase)))|>
-    dplyr::select(Mes,Fator,VariacaoMensal,Variacao12Mees,valorReajustado,MesBase)|>
+    dplyr::select(Mes,Fator,VariacaoMensal,Variacao12Meses,valorReajustado,MesBase)|>
     dplyr::filter(Mes >= database)
 
   return(df)
