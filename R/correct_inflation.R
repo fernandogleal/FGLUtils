@@ -23,7 +23,6 @@
 #' @export
 
 correct_inflation <- function(valor = 1000, database = "01/2001", indice = "ipca"){
-correct_inflation <- function(valor = 1000, database = "01/2001", indice = "ipca"){
 
   library(lubridate)
   ajustar_data <- function(database){
@@ -94,4 +93,3 @@ correct_inflation <- function(valor = 1000, database = "01/2001", indice = "ipca
   return(df)
 
 }
-

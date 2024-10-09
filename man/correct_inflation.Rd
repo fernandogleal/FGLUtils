@@ -4,7 +4,7 @@
 \alias{correct_inflation}
 \title{Reajusta um valor de acordo com a inflação}
 \usage{
-correct_inflation(valor = 1000, database = "01/2003", indice = "ipca")
+correct_inflation(valor = 1000, database = "01/2001", indice = "ipca")
 }
 \arguments{
 \item{valor}{Valor a ser reajustado (default é 1000.00).}
