@@ -62,6 +62,7 @@ dcalendario <- seq(as.Date(data_inicial), as.Date(data_final), "days") |>
     mes_nome = month_names_pt[mes], 
     mes_ano = stringr::str_pad(mes, 2, pad = "0") |> stringr::str_c("_", ano),
     tri = stringr::str_c("tri", lubridate::quarter(data), sep = " "),
+    semana_ano = lubridate::week(data),
     dia = lubridate::day(data),
     dia_semana = lubridate::wday(data),
     dia_semana_nome = weekday_names_pt[dia_semana],
