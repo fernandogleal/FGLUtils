@@ -28,6 +28,10 @@ Then, you can install FGLUtils:
 devtools::install_github("fernandogleal/FGLUtils")
 ```
 
+```bash
+sudo Rscript -e 'devtools::install_github("fernandogleal/FGLUtils")'
+```
+
 ## Usage
 
 After installation, you can load the package using:
