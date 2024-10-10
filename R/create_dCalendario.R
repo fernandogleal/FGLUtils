@@ -67,7 +67,8 @@ dcalendario <- seq(as.Date(data_inicial), as.Date(data_final), "days") |>
     dia_semana_nome = weekday_names_pt[dia_semana],
     dia_semana_nome_abr = weekday_names_abr_pt[dia_semana]
   ) |> 
-  janitor::clean_names()
+  janitor::clean_names() |> 
+  dplyr::mutate(dplyr::across(c(mes_nome_abr,des_mes_ano,mes_nome,tri,dia_semana_nome,dia_semana_nome_abr), stringr::str_to_title))
 
 dt <- data.table::data.table(dcalendario)
 
