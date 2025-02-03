@@ -22,7 +22,8 @@ find_insert <- function (base_classificar, nome_coluna_procurar, base_identifica
 
   for (i in 1:nrow(base_identificacao)) {
     base_classificar[grepl(tolower(base_identificacao$procurar[i]),
-                           tolower(base_classificar$procurar)),]$inserido <-
+                           tolower(base_classificar$procurar),
+                           fixed = TRUE),]$inserido <-
       base_identificacao$inserir[i]
   }
 
