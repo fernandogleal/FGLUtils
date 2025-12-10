@@ -30,6 +30,10 @@ devtools::install_github("fernandogleal/FGLUtils")
 
 ```bash
 sudo Rscript -e 'devtools::install_github("fernandogleal/FGLUtils")'
+devtools::document()
+devtools::build()
+devtools::install()
+
 ```
 
 ## Usage

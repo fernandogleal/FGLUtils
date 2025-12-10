@@ -13,30 +13,20 @@
 find_insert <- function (base_classificar, nome_coluna_procurar, base_identificacao, nome_coluna_inserir) {
 
   base_classificar <- base_classificar |>
-    dplyr::mutate(inserido := NA) |>
-    dplyr::rename(procurar := {
-      {
-        nome_coluna_procurar
-      }
-    })
+    dplyr::mutate(inserido = NA) |>
+    dplyr::rename(procurar = dplyr::all_of(nome_coluna_procurar))
 
-  for (i in 1:nrow(base_identificacao)) {
-    base_classificar[grepl(tolower(base_identificacao$procurar[i]),
-                           tolower(base_classificar$procurar),
-                           fixed = TRUE),]$inserido <-
-      base_identificacao$inserir[i]
+  for (i in seq_len(nrow(base_identificacao))) {
+    mask <- grepl(tolower(base_identificacao$procurar[i]),
+                  tolower(base_classificar$procurar))
+    if (any(mask)) {
+      base_classificar$inserido[mask] <- base_identificacao$inserir[i]
+    }
   }
 
   base_classificar <- base_classificar |>
-    dplyr::rename({
-      {
-        nome_coluna_inserir
-      }
-    } := inserido, {
-      {
-        nome_coluna_procurar
-      }
-    } := procurar)
+    dplyr::rename_with(~ nome_coluna_inserir, .cols = "inserido") |>
+    dplyr::rename_with(~ nome_coluna_procurar, .cols = "procurar")
 
   return(base_classificar)
 }

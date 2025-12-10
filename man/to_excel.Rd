@@ -4,15 +4,24 @@
 \alias{to_excel}
 \title{Create Excel file with a sheet for each dataframe in a list}
 \usage{
-to_excel(df, arquivo = "padrao", caminho = "C:/Users/FLeal/Downloads")
+to_excel(
+  df,
+  arquivo = "padrao",
+  caminho = "C:/Users/FLeal/Downloads",
+  open_file = TRUE
+)
 }
 \arguments{
 \item{df}{a list of dataframes}
 
 \item{arquivo}{a character string for the name of the excel file}
+
+\item{caminho}{a character string for the file path}
+
+\item{open_file}{logical indicating whether to open the file after creation (default: TRUE)}
 }
 \value{
-opens the Excel file
+opens the Excel file if open_file is TRUE
 }
 \description{
 Takes a list of dataframes and exports each dataframe to a separate sheet in an Excel file, with the sheet name being the name of the dataframe if it's named in the list, or "Sheet" followed by the index of the dataframe in the list if it's not named.
